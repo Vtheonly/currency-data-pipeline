@@ -4,6 +4,8 @@ export type AssetType = "currency" | "commodity";
 /** A unique identifier for an asset, e.g., "USD_EGP" or "OIL_WTI". */
 export type AssetIdentifier = string;
 
+export type RateType = "official" | "parallel_market" | "interbank" | "market";
+
 /** The clean, standardized data for a single asset's current state. */
 export interface StandardizedRate {
   buying: number;
@@ -25,7 +27,7 @@ export interface StandardizedAsset {
   type: AssetType;
   source: string;
   timestamp: number;
-  rateData: StandardizedRate;
+  rates: Partial<Record<RateType, StandardizedRate>>;
   historicalData: StandardizedHistoricalPoint[];
 }
 

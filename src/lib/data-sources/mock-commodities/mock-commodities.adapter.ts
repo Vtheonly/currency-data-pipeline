@@ -27,13 +27,14 @@ export class MockCommoditiesAdapter {
         type: "commodity",
         source: this.sourceName,
         timestamp,
-        rateData: {
-          // Commodities often have one price, so buying/selling can be derived
-          buying: commodity.price * 0.998,
-          selling: commodity.price * 1.002,
-          midRate: commodity.price,
-          unit: commodity.unit,
-        },
+        rates: {
+          'market': { // Commodities have a general market rate
+            buying: commodity.price * 0.998,
+            selling: commodity.price * 1.002,
+            midRate: commodity.price,
+            unit: commodity.unit,
+          }
+        }, // <-- THIS COMMA WAS MISSING
         // Simulate some historical data
         historicalData: Array.from({ length: 30 }, (_, i) => ({
           timestamp: timestamp - (30 - i) * 86400000,

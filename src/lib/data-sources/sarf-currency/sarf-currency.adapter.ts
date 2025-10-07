@@ -44,11 +44,14 @@ export class SarfCurrencyAdapter {
         type: "currency",
         source: this.sourceName,
         timestamp: now,
-        rateData: {
-          buying: rawRate.buying,
-          selling: rawRate.selling,
-          midRate: (rawRate.buying + rawRate.selling) / 2,
-          unit: "EGP",
+        rates: {
+          parallel_market: {
+            // This source provides parallel market rates
+            buying: rawRate.buying,
+            selling: rawRate.selling,
+            midRate: (rawRate.buying + rawRate.selling) / 2,
+            unit: "EGP",
+          },
         },
         historicalData,
       };
