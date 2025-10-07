@@ -5,7 +5,12 @@ import {
   DataSourceHealth,
   AssetIdentifier,
 } from "@/lib/core/data-contracts";
-import { SarfCurrencySource, MockCommoditiesSource } from "@/lib/data-sources";
+// v-- IMPORT THE NEW SOURCE HERE
+import {
+  SarfCurrencySource,
+  MockCommoditiesSource,
+  ForexAlgerieSource,
+} from "@/lib/data-sources";
 import { DataOrchestrator } from "./data.orchestrator";
 import { Logger, LogEntry, LogLevel } from "@/lib/utils/logger";
 
@@ -26,6 +31,7 @@ export class ExchangeService {
     // Define the priority of data source modules here
     if (config.mode === "production" || config.mode === "hybrid") {
       sources.push(new SarfCurrencySource());
+      sources.push(new ForexAlgerieSource()); // <-- ADD THE NEW SOURCE TO THE ARRAY
       sources.push(new MockCommoditiesSource()); // Add other sources here
     }
 
@@ -37,6 +43,7 @@ export class ExchangeService {
     this.logger.info(`Service initialized in ${config.mode} mode.`);
   }
 
+  // ... rest of the file remains the same
   public static getInstance(): ExchangeService {
     if (!ExchangeService.instance)
       ExchangeService.instance = new ExchangeService();

@@ -4,3 +4,4 @@
  */
 export { SarfCurrencySource } from "./sarf-currency/sarf-currency.source";
 export { MockCommoditiesSource } from "./mock-commodities/mock-commodities.source";
+export { ForexAlgerieSource } from "./forex-algerie/forex-algerie.source"; // <-- ADD THIS LINE
